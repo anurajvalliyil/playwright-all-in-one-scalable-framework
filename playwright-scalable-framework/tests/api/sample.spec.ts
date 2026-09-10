@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 import { ApiHelper } from '../../utils/apiHelper';
 import { environments } from '../../config/environments';
+import { SchemaValidator } from '../../utils/schemaValidator';
+import userSchema from '../../data/schemas/userSchema.json';
 
 test.describe('API Tests', () => {
   let apiHelper: ApiHelper;
@@ -16,6 +18,10 @@ test.describe('API Tests', () => {
     expect(response.status()).toBe(200);
     
     const body = await response.json();
+    
+    // Contract Validation (Schema Test)
+    SchemaValidator.validate(userSchema, body);
+    
     expect(body.page).toBe(2);
     expect(body.data.length).toBeGreaterThan(0);
   });

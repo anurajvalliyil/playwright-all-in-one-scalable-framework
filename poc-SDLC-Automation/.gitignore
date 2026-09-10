@@ -1,0 +1,7 @@
+node_modules/
+.env
+logs/
+.deepeval/
+reports/
+__pycache__/
+*.pyc

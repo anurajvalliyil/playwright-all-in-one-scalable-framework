@@ -1,14 +1,12 @@
-# Highly Scalable Playwright Automation Framework
+# The 5-Pillar QE Framework
 
-A scalable end-to-end testing framework using Playwright, designed to support UI and API testing across multiple environments, featuring built-in MCP (Model Context Protocol) support for AI agents.
+A scalable end-to-end testing framework using Playwright, designed to comprehensively test modern applications. This framework covers 5 critical pillars of software quality:
 
-## Features
-
-- **Multi-Environment Support**: Seamlessly switch between `qa`, `dev`, etc. via `.env` files.
-- **Page Object Model (POM)**: Robust UI automation patterns for `saucedemo.com`.
-- **API Testing Utilities**: Extensible API testing setup supporting full CRUD operations.
-- **AI Agent Native**: Built-in Antigravity Skill (`.agents/skills/playwright-framework`) and an MCP server.
-- **Parallel Execution**: Fully parallelized test running for fast execution.
+1. **UI Automation**: Robust Page Object Model (POM) and custom fixtures.
+2. **API Contract Testing**: Strict JSON schema validation using `ajv`.
+3. **Accessibility (a11y)**: Automatic WCAG scanning using `@axe-core/playwright`.
+4. **Performance**: Integrated Lighthouse audits via `playwright-lighthouse`.
+5. **Security**: Passive OWASP security header validation.
 
 ## Getting Started
 
@@ -23,35 +21,28 @@ A scalable end-to-end testing framework using Playwright, designed to support UI
    npx playwright install chromium
    ```
 
-2. Build the MCP Server (optional, for AI agents):
-   ```bash
-   cd mcp-server
-   npm install
-   npm run build
-   ```
+## Running Tests
 
-### Running Tests
-
-Run tests locally using predefined npm scripts:
+Run specific pillars locally using npm scripts:
 
 - **UI Tests**: `npm run test:ui`
 - **API Tests**: `npm run test:api`
-- **QA Environment**: `npm run test:qa`
-- **DEV Environment**: `npm run test:dev`
+- **Accessibility**: `npm run test:a11y`
+- **Performance**: `npm run test:perf`
+- **Security**: `npm run test:security`
+- **Run Everything**: `npm run test:all`
 
 ## Architecture Overview
 
-- `config/environments.ts`: Master configuration loader mapping `process.env` to typed configurations.
+- `config/environments.ts`: Master configuration loader mapping `process.env`.
 - `page-objects/`: UI element locators and high-level interaction methods.
-- `utils/`: Shared utilities, such as `apiHelper.ts`.
-- `tests/`: 
-  - `ui/`: End-to-end browser tests.
-  - `api/`: API integration tests.
-- `mcp-server/`: An MCP server that exposes Playwright execution capabilities to standard LLM agents.
-- `.agents/`: Contains the Antigravity `mcp_config.json` and the framework `SKILL.md`.
+- `utils/`: Custom helpers including `logger.ts`, `schemaValidator.ts`, `securityScanner.ts`, and `performanceAudit.ts`.
+- `data/schemas/`: Contains JSON schemas for API contract testing.
+- `tests/`: Organized by pillar (`ui`, `api`, `a11y`, `performance`, `security`).
+- `mcp-server/`: An MCP server that exposes Playwright execution capabilities.
+- `.github/workflows/`: Native CI/CD pipeline for GitHub Actions.
 
-## Integration with Antigravity Agents
+## AI Agent Integration
 
 This project contains an Antigravity agent skill. If you are using Antigravity, it will automatically load the `.agents/skills/playwright-framework/SKILL.md` when it navigates to this directory.
-
 The MCP server is registered via `.agents/mcp_config.json` and exposes a tool `run_playwright_tests` allowing agents to autonomously execute subsets of tests and retrieve results.

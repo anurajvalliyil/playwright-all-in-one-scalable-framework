@@ -6,6 +6,10 @@
   "scripts": {
     "test:ui": "playwright test tests/ui",
     "test:api": "playwright test tests/api",
+    "test:a11y": "playwright test tests/a11y",
+    "test:perf": "playwright test tests/performance",
+    "test:security": "playwright test tests/security",
+    "test:all": "playwright test",
     "test:qa": "cross-env ENV=qa playwright test",
     "test:dev": "cross-env ENV=dev playwright test"
   },
@@ -17,10 +21,16 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
     "@playwright/test": "^1.42.0",
     "@types/node": "^20.11.24",
+    "ajv": "^8.20.0",
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
+    "playwright-lighthouse": "^4.0.0",
     "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "winston": "^3.19.0"
   }
 }

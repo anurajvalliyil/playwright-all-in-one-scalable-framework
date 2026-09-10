@@ -1,0 +1,19 @@
+node_modules/
+playwright-report/
+test-results/
+reports/
+dist/
+
+# MCP Server
+mcp-server/dist/
+mcp-server/node_modules/
+
+# Environment Variables
+.env
+# Note: In a real project you'd ignore all .env files, but since .env.qa and .env.dev 
+# contain demo credentials for this framework, we can keep them out of gitignore if desired.
+# .env.*
+
+# OS generated files
+.DS_Store
+Thumbs.db
